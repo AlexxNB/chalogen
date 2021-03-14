@@ -27,12 +27,12 @@ const DEV = process.argv.includes('--dev');
             entryPoints: ['./src/bin.js'],
             platform: 'node',
             format: "cjs",
-            outfile: pkg.bin,
+            outfile: pkg.bin.chlogen,
             minify: !DEV,
             bundle: true,
         });
 
-        await fs.chmod(pkg.bin,0o755);
+        await fs.chmod(pkg.bin.chlogen,0o755);
 
         process.exit(0);
     }catch(err){
