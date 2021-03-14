@@ -1,9 +1,10 @@
 import {execSync} from 'child_process';
 import {trimNewlines} from '@lib/utils'
+import {sortByGroup} from '@lib/convention';
 
 /** Get tree-objects of commits separated by tags/version_commits */
 
-export function getHistory(){
+export function getHistory(conventional){
     const commits = getLocalCommits();
     const tags = getLocalTags();
 
@@ -41,6 +42,10 @@ export function getHistory(){
     });
 
     commits.forEach(commit => tree.addCommit(commit));
+
+    if(conventional) for(let ver in tree.list){
+        tree.list[ver].commits = sortByGroup(tree.list[ver].commits);
+    }
 
     return tree.list;
 }
