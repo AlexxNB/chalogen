@@ -1,0 +1,9 @@
+{
+    "baseURL":".",
+    "compilerOptions": {
+        "paths": {
+            "changeloger": ["./dist/lib.js"],
+            "package": ["./package.json"],
+        }
+    }
+}

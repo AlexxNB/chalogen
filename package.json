@@ -2,9 +2,12 @@
   "name": "changeloger",
   "version": "0.0.1",
   "description": "CHANGELOG.md generator CLI and Github Action",
-  "main": "index.js",
+  "main": "dist/lib.js",
+  "bin": "dist/changeloger.js",
   "scripts": {
     "build": "node esbuild",
+    "prestart": "npm run build --dev",
+    "start": "./dist/changeloger.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +25,7 @@
   },
   "homepage": "https://github.com/AlexxNB/changeloger#readme",
   "devDependencies": {
-    "esbuild": "^0.9.2"
+    "esbuild": "^0.9.2",
+    "sade": "^1.7.4"
   }
 }
