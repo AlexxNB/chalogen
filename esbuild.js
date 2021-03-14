@@ -10,7 +10,7 @@ const DEV = process.argv.includes('--dev');
 
         // Build lib
         await build({
-            entryPoints: ['./src/lib.js'],
+            entryPoints: ['./src/module.js'],
             platform: 'node',
             format: "cjs",
             outfile: pkg.main,
