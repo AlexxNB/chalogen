@@ -67,7 +67,8 @@ export function getLocalCommits(){
             author: parts[1],
             subject: trimNewlines(bodyParts[0]),
             body: (bodyParts[1] && trimNewlines(bodyParts[1])) || null,
-            footer: (bodyParts[2] && trimNewlines(bodyParts[2])) || null
+            footer: (bodyParts[2] && trimNewlines(bodyParts[2])) || null,
+            issues: getIssues(parts[2])
         })
     }
     return list;
@@ -90,7 +91,36 @@ export function getLocalTags(){
     return list;
 }
 
+/** Get repository info */
+export function getLocalRepoInfo(){
+    const raw = git('remote', 'get-url', 'origin');
+    const match = raw.match(/git@(.+?):(.+?)\/(.+?).git/);
+    if(!match) return null;
+    return{
+        type: match[1].replace(/\..+$/,''),
+        url: 'https://'+match[1],
+        owner: match[2],
+        project: match[3],
+    }
+}
+
+/** Make issue link */
+export function makeIssueLink(repo,id){
+    return `${repo.url}/${repo.owner}/${repo.project}/issues/${id}`;
+}
+
 /** Run git command with specified arguments. @return Raw command output */
 function git(){
     return execSync('git '+Array.from(arguments).join(' ')).toString('utf-8');
+}
+
+/** Get Issues IDs in array */
+function getIssues(str){
+    const re = /(?:issues\/(\d+)| #(\d+)|^#(\d+))/g;
+    const result = [];
+    let match;
+    while(match = re.exec(str)){
+        result.push(match[1] || match[2] || match[3]);
+    }
+    return [...new Set(result)];
 }

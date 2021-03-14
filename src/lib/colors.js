@@ -11,4 +11,5 @@ export default {
 
     bold: str => color(str,1,22),
     italic: str => color(str,3,23),
+    link: (text,url)=> `\u001B]8;;${url}\u0007${text}\u001B]8;;\u0007`
 }

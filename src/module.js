@@ -1,4 +1,4 @@
-import {getHistory} from '@lib/git';
+import {getHistory,getLocalRepoInfo} from '@lib/git';
 import {renderCli} from '@lib/render';
 
 export const default_options = {
@@ -6,19 +6,20 @@ export const default_options = {
     showTypes: ['feat','fix','perf','docs','other'],
     title: 'Changelog',
     dateFormat: '%Y-%M-%D',
-    showUnreleased: true
+    showUnreleased: true,
+    showBody: true
 }
 
 export function render(options){
 
     options = {
         ...default_options,
-        ...(options || {})
+        ...(options || {}),
+        history: getHistory(true),
+        repo: getLocalRepoInfo()
     }
 
-    const history = getHistory(true);
-
     if(!options.output){
-        renderCli(history,options);
+        renderCli(options);
     }
 }
