@@ -1,9 +1,11 @@
 {
   "name": "chlogen",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "CHANGELOG.md generator CLI and Github Action",
   "main": "dist/lib.js",
-  "bin": "dist/chlogen.js",
+  "bin": {
+    "chlogen": "dist/chlogen.js"
+  },
   "scripts": {
     "build": "node esbuild",
     "prestart": "npm run build --dev",
