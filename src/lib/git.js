@@ -56,19 +56,20 @@ export function getHistory(conventional){
 /** Get array of the commits from local dir */
 export function getLocalCommits(){
     let list = [];
-    let raw = git('log','--pretty=format:begin:%at:*:%an:*:%B:end','--date=raw');
+    let raw = git('log','--pretty=format:begin:%H:*:%at:*:%an:*:%B:end','--date=raw');
     const re = /^begin:([\s\S]+?):end$/gm;
     let match;
     while(match = re.exec(raw)){
         const parts = match[1].split(':*:');
-        const bodyParts = parts[2].split('\n\n');
+        const bodyParts = parts[3].split('\n\n');
         list.push({
-            date: Number(parts[0]),
-            author: parts[1],
+            date: Number(parts[1]),
+            hash: parts[0],
+            author: parts[2],
             subject: trimNewlines(bodyParts[0]),
             body: (bodyParts[1] && trimNewlines(bodyParts[1])) || null,
             footer: (bodyParts[2] && trimNewlines(bodyParts[2])) || null,
-            issues: getIssues(parts[2])
+            issues: getIssues(parts[3])
         })
     }
     return list;
@@ -107,6 +108,11 @@ export function getLocalRepoInfo(){
 /** Make issue link */
 export function makeIssueLink(repo,id){
     return `${repo.url}/${repo.owner}/${repo.project}/issues/${id}`;
+}
+
+/** Make commit link */
+export function makeCommitLink(repo,hash){
+    return `${repo.url}/${repo.owner}/${repo.project}/${repo.type == 'bitbucket' ? 'commits' : 'commit'}/${hash}`;
 }
 
 

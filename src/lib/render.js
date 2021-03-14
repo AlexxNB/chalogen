@@ -1,5 +1,5 @@
 import c from '@lib/colors';
-import {makeIssueLink} from '@lib/git';
+import {makeIssueLink,makeCommitLink} from '@lib/git';
 import {getDate} from '@lib/utils';
 import {getTypeName} from '@lib/convention';
 import {parseEmojies} from '@lib/emoji';
@@ -25,8 +25,9 @@ export function renderCli(options){
                 const issues = commit.issues 
                             && commit.issues.length 
                             && ` (${commit.issues.map(i =>c.link('#'+i,makeIssueLink(options.repo,i))).join(', ')})`;
+                const link = c.blue(c.link(commit.hash.substring(0,8),makeCommitLink(options.repo,commit.hash)));
                 
-                l('  ',c.green('*'),`${namespace}${message}${issues||''}`);
+                l('  ',c.green('*'),`${namespace}${message}${issues||''} ${link}`);
                 if(options.showBody && body) l('    ',body);
             }
         }
