@@ -15,6 +15,7 @@ const DEV = process.argv.includes('--dev');
             format: "cjs",
             outfile: pkg.main,
             minify: !DEV,
+            sourcemap: DEV && 'inline',
             bundle: true,
             external: [
                 ...Object.keys(pkg.dependencies||{}),
@@ -27,6 +28,7 @@ const DEV = process.argv.includes('--dev');
             entryPoints: ['./src/bin.js'],
             platform: 'node',
             format: "cjs",
+            sourcemap: DEV && 'inline',
             outfile: pkg.bin.chlogen,
             minify: !DEV,
             bundle: true,

@@ -8,8 +8,8 @@
   },
   "scripts": {
     "build": "node esbuild",
-    "prestart": "npm run build --dev",
-    "start": "./dist/chlogen.js",
+    "prestart": "npm run build -- --dev",
+    "start": "node --enable-source-maps dist/chlogen.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
