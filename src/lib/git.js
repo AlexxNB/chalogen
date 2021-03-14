@@ -56,16 +56,18 @@ export function getHistory(conventional){
 /** Get array of the commits from local dir */
 export function getLocalCommits(){
     let list = [];
-    let raw = git('log','--pretty=format:begin:%at:*:%an:*:%s:*:%b:end','--date=raw');
+    let raw = git('log','--pretty=format:begin:%at:*:%an:*:%B:end','--date=raw');
     const re = /^begin:([\s\S]+?):end$/gm;
     let match;
     while(match = re.exec(raw)){
         const parts = match[1].split(':*:');
+        const bodyParts = parts[2].split('\n\n');
         list.push({
             date: Number(parts[0]),
             author: parts[1],
-            subject: trimNewlines(parts[2]),
-            body: trimNewlines(parts[3]) || null
+            subject: trimNewlines(bodyParts[0]),
+            body: (bodyParts[1] && trimNewlines(bodyParts[1])) || null,
+            footer: (bodyParts[2] && trimNewlines(bodyParts[2])) || null
         })
     }
     return list;
