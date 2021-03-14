@@ -2,7 +2,7 @@
     "baseURL":".",
     "compilerOptions": {
         "paths": {
-            "changeloger": ["./dist/lib.js"],
+            "chlogen": ["./dist/lib.js"],
             "package": ["./package.json"],
         }
     }

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import sade from 'sade';
-import {sayHello} from 'changeloger';
+import {sayHello} from 'chlogen';
 import pkg from 'package';
 
-const cli = sade('changeloger',true)
+const cli = sade('chlogen',true)
 
 cli.version(pkg.version);
 
