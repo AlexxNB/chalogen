@@ -1,5 +1,5 @@
-import {getLocalCommits,getLocalTags} from '@lib/git';
+import {getHistory} from '@lib/git';
 
 export function sayHello(){
-    getLocalTags();
+    console.log(getHistory());
 }
