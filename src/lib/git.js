@@ -109,6 +109,7 @@ export function makeIssueLink(repo,id){
     return `${repo.url}/${repo.owner}/${repo.project}/issues/${id}`;
 }
 
+
 /** Run git command with specified arguments. @return Raw command output */
 function git(){
     return execSync('git '+Array.from(arguments).join(' ')).toString('utf-8');

@@ -20,8 +20,8 @@ export function renderCli(options){
             l(' ',`${c.bold(c.green(getTypeName(type)))}:`);
             for(let commit of ver.commits[type]){
                 const namespace = commit.namespace ? c.bold(commit.namespace+': ') : '';
-                const message = parseEmojies(commit.subject);
-                const body = commit.body && c.gray(parseEmojies(commit.body));
+                const message = parseEmojies(cleanCliLinks(commit.subject));
+                const body = commit.body && c.gray(parseEmojies(cleanCliLinks(commit.body)));
                 const issues = commit.issues 
                             && commit.issues.length 
                             && ` (${commit.issues.map(i =>c.link('#'+i,makeIssueLink(options.repo,i))).join(', ')})`;
@@ -31,4 +31,8 @@ export function renderCli(options){
             }
         }
     }
+}
+
+function cleanCliLinks(str){
+    return str.replace(/https?:\/\/.+?\/(?:issues|pull|merge_requests|pull_requests)\/(\d+)(?:\/\S*)?/gi,'#$1')
 }
