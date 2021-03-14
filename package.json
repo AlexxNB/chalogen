@@ -28,6 +28,7 @@
   "homepage": "https://github.com/AlexxNB/chlogen#readme",
   "devDependencies": {
     "esbuild": "^0.9.2",
+    "gitmojis": "^3.2.0",
     "sade": "^1.7.4"
   }
 }

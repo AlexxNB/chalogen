@@ -7,6 +7,8 @@ const DEV = process.argv.includes('--dev');
 // Top-level Await? Ha-Ha
 (async ()=>{
     try{
+        // Build emoji list
+        await build_emoji();
 
         // Build lib
         await build({
@@ -42,3 +44,14 @@ const DEV = process.argv.includes('--dev');
         process.exit(1);
     }
 })()
+
+async function build_emoji(){
+    const list = require('gitmojis').gitmojis;
+    const result = list.reduce((o,e) => {
+        o[e.code] = e.emoji;
+        return o;
+    },{})
+
+    await fs.writeFile('dist/emoji.json',JSON.stringify(result));
+
+}
