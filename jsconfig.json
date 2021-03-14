@@ -4,6 +4,7 @@
         "paths": {
             "chlogen": ["./dist/lib.js"],
             "package": ["./package.json"],
+            "@lib/*": ["./src/lib/*"]
         }
     }
 }
