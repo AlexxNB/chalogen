@@ -35,5 +35,8 @@ export function renderCli(options){
 }
 
 function cleanCliLinks(str){
-    return str.replace(/https?:\/\/.+?\/(?:issues|pull|merge_requests|pull_requests)\/(\d+)(?:\/\S*)?/gi,'#$1')
+    return str
+        .replace(/https?:\/\/.+?\/(?:issues|pull|merge_requests|pull_requests)\/(\d+)(?:\/\S*)?/gi,(match,id)=>{
+            return c.link('#'+id, match);
+        })
 }
