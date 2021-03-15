@@ -36,6 +36,6 @@ function makeOptions(opts){
         showUnreleased: opts.hideUnreleased == 'false',
         showBody: opts.hideTitle == 'false',
         showTitle: opts.hideBody == 'false',
-        onlyVersion: (!!opts.version != 'false' && opts.version) || (opts.unreleased != 'false' && 'unreleased'),
+        onlyVersion: (opts.version != 'false' && opts.version) || (opts.unreleased != 'false' && 'unreleased'),
     }
 }
