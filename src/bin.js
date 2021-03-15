@@ -25,7 +25,7 @@ cli
     })
 
 cli
-    .command('generate [dir]')
+    .command('generate [dir]', '', { default:true })
     .describe('Write generated changelog to the file')
     .action( (dir,opts) => {
         opts.output = 'markdown';
