@@ -99,7 +99,7 @@ export function getLocalRepoInfo(){
     const raw = git('config', '--get', 'remote.origin.url');
     let match = raw.match(/git@(.+?):(.+?)\/(.+?).git/);
     if(!match) {
-        match = raw.match(/https?:\/\/(.+?)\/(.+?)\/(.+)$/);
+        match = raw.match(/https?:\/\/(.+?)\/(.+?)\/(.+)/);
     }
     if(!match) return null;
     return{
