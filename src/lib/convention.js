@@ -22,13 +22,14 @@ export function sortByGroup(commits){
         const match = commit.subject.match(/^(?:(\w+?)(?:\((.*?)\))?:\s*)?(.+)$/);
         const type = (match[1] && TYPES[match[1]] && match[1]) || 'other';
 
-        if(!result[type]) result[type] = [];
-
-        result[type].push({
-            ...commit,
-            subject: match[3],
-            namespace:  match[2] || null
-        })
+        if(!(type == 'docs' && match[2] == 'Changelog')){
+            if(!result[type]) result[type] = [];
+            result[type].push({
+                ...commit,
+                subject: match[3],
+                namespace:  match[2] || null
+            })
+        }
 
         return result;
     },{});
