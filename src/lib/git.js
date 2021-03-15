@@ -50,7 +50,7 @@ export function getHistory(conventional){
         tree.list[ver].commits = sortByGroup(tree.list[ver].commits);
     }
 
-    if(Object.keys(tree.list['unreleased']).length == 0) delete tree.list['unreleased'];
+    if(Object.keys(tree.list['unreleased'].commits).length == 0) delete tree.list['unreleased'];
 
     return tree.list;
 }
