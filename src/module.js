@@ -1,8 +1,8 @@
 import {getHistory,getLocalRepoInfo} from '@lib/git';
-import {renderCli} from '@lib/render';
+import {renderCli,renderMarkdown} from '@lib/render';
 
 export const default_options = {
-    output: false,
+    output: 'cli',
     showTypes: ['feat','fix','perf','docs','other'],
     title: 'Changelog',
     dateFormat: '%Y-%M-%D',
@@ -21,7 +21,11 @@ export function render(options){
         repo: getLocalRepoInfo()
     }
 
-    if(!options.output){
+    if(!options.output || options.output == 'markdown'){
+        return renderMarkdown(options);
+    }
+
+    if(options.output == 'cli'){
         renderCli(options);
     }
 }

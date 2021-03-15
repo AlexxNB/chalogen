@@ -3,6 +3,7 @@ import {makeIssueLink,makeCommitLink} from '@lib/git';
 import {getDate} from '@lib/utils';
 import {getTypeName} from '@lib/convention';
 import {parseEmojies} from '@lib/emoji';
+import {createDocument} from '@lib/markdown';
 
 const l = console.log;
 
@@ -21,7 +22,6 @@ export function renderCli(options){
 
     for(let tag in options.history){
         if( !options.showUnreleased && tag == 'unreleased' ) continue;
-        if( tag == 'unreleased' && !options.history[tag].commits.length) continue;
 
         const ver = options.history[tag];
 
@@ -45,9 +45,61 @@ export function renderCli(options){
     }
 }
 
+
+export function renderMarkdown(options){
+    const changelog = createDocument();
+
+    if(options.showTitle){
+        changelog.header(options.title,1,0);
+    }
+    
+    if(options.onlyVersion){
+        const only = options.history[options.onlyVersion];
+        options.history = {};
+        if(only) options.history[options.onlyVersion] = only;
+    }
+
+    for(let tag in options.history){
+        if( !options.showUnreleased && tag == 'unreleased' ) continue;
+
+        const ver = options.history[tag];
+
+        !options.onlyVersion && changelog.header(`${tag}${ver.date ? ` - `+getDate(ver.date,options.dateFormat) : ''}`,2,0);
+
+        for(let type of options.showTypes){
+            if(!ver.commits[type]) continue;
+
+            changelog.header(getTypeName(type),3,0);
+            
+            changelog.newline();
+            for(let commit of ver.commits[type]){
+                const namespace = commit.namespace ? changelog.bold(commit.namespace+':')+' ' : '';
+                const message = parseEmojies(cleanMDLinks(commit.subject,changelog));
+                const body = commit.body && parseEmojies(cleanMDLinks(commit.body,changelog));
+                const issues = commit.issues 
+                            && commit.issues.length 
+                            && ` (${commit.issues.map(i => changelog.link('#'+i,makeIssueLink(options.repo,i))).join(', ')})`;
+                const link = changelog.link(changelog.code(commit.hash.substring(0,8)),makeCommitLink(options.repo,commit.hash));
+                
+                changelog.list(`${namespace}${message}${issues||''} ${link}`,0);
+                if(options.showBody && body) changelog.line(body,0);
+            }
+        }
+    }
+
+    return changelog.render();
+}
+
 function cleanCliLinks(str){
     return str
         .replace(/https?:\/\/.+?\/(?:issues|pull|merge_requests|pull_requests)\/(\d+)(?:\/\S*)?/gi,(match,id)=>{
             return c.link('#'+id, match);
+        })
+}
+
+function cleanMDLinks(str,doc){
+    return str
+        .replace(/https?:\/\/.+?\/(?:issues|pull|merge_requests|pull_requests)\/(\d+)(?:\/\S*)?/gi,(match,id)=>{
+            return doc.link('#'+id, match);
         })
 }

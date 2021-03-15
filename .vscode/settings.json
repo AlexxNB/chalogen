@@ -1,6 +1,7 @@
 {
     "conventionalCommits.scopes": [
         "Package",
-        "CLI"
+        "CLI",
+        "Markdown"
     ]
 }

@@ -2,6 +2,7 @@
 import sade from 'sade';
 import {render,default_options} from 'chlogen';
 import pkg from 'package';
+import fs from 'fs';
 
 const cli = sade('chlogen');
 
@@ -20,15 +21,29 @@ cli
     .command('print')
     .describe('Print changelog in terminal')
     .action( opts => {
-        render({
-            title: opts.title,
-            showTypes: opts.list.split(','),
-            dateFormat: opts.date,
-            showUnreleased: opts.unreleased !== false,
-            showBody: opts.body !== false,
-            showTitle: opts.title !== false,
-            onlyVersion: (!!opts.only && opts.only) || (opts.u && 'unreleased'),
-        });
+        render(makeOptions(opts));
+    })
+
+cli
+    .command('generate [dir]')
+    .describe('Write generated changelog to the file')
+    .action( (dir,opts) => {
+        opts.output = 'markdown';
+        const ms = render(makeOptions(opts));
+        fs.writeFileSync(dir || 'CHANGELOG.md',ms)
     })
 
 cli.parse(process.argv);
+
+function makeOptions(opts){
+    return {
+        title: opts.title,
+        output: opts.output || 'cli',
+        showTypes: opts.list.split(','),
+        dateFormat: opts.date,
+        showUnreleased: opts.unreleased !== false,
+        showBody: opts.body !== false,
+        showTitle: opts.title !== false,
+        onlyVersion: (!!opts.only && opts.only) || (opts.u && 'unreleased'),
+    }
+}
