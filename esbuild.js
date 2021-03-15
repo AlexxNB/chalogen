@@ -31,12 +31,12 @@ const DEV = process.argv.includes('--dev');
             platform: 'node',
             format: "cjs",
             sourcemap: DEV && 'inline',
-            outfile: pkg.bin.chlogen,
+            outfile: pkg.bin.chalogen,
             minify: !DEV,
             bundle: true,
         });
 
-        await fs.chmod(pkg.bin.chlogen,0o755);
+        await fs.chmod(pkg.bin.chalogen,0o755);
 
         process.exit(0);
     }catch(err){
@@ -50,7 +50,11 @@ async function build_emoji(){
     const result = list.reduce((o,e) => {
         o[e.code] = e.emoji;
         return o;
-    },{})
+    },{});
+
+    try{
+        await fs.mkdir('dist');
+    }catch{}
 
     await fs.writeFile('dist/emoji.json',JSON.stringify(result));
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import sade from 'sade';
-import {render,default_options} from 'chlogen';
+import {render,default_options} from 'chalogen';
 import pkg from 'package';
 import fs from 'fs';
 
-const cli = sade('chlogen');
+const cli = sade('chalogen');
 
 cli
     .version(pkg.version)
