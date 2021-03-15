@@ -8,6 +8,7 @@
 
 ### Bug Fixes
 
+- Changelog updating from action is going to changelog too [`f8faf942`](https://github.com/AlexxNB/chalogen/commit/f8faf94215e1e407f2bfae2e4022d405d441fdeb)
 - Fix pattern [`20b2abe2`](https://github.com/AlexxNB/chalogen/commit/20b2abe2ba2c0d1c534ffabef254903905ce5eb2)
 - Fetch deps should be full [`1540a6e0`](https://github.com/AlexxNB/chalogen/commit/1540a6e08cfe4fc0b2b3f1719643ce81b6c1ccb6)
 - Last pattern shouldn't be ungreed [`b2c838e5`](https://github.com/AlexxNB/chalogen/commit/b2c838e574b02f790720cfab78fa36fe704b0602)
@@ -19,6 +20,7 @@
 
 ### Other
 
+- **Changelog:** Update Changelog [`af1eae0f`](https://github.com/AlexxNB/chalogen/commit/af1eae0f1d2283c139f097c2eb79bf9fabec116b)
 - **Changelog:** Update Changelog [`e95129e9`](https://github.com/AlexxNB/chalogen/commit/e95129e903d21ee32239014a64572cb750448e9a)
 - **Changelog:** Update Changelog [`a2d149cd`](https://github.com/AlexxNB/chalogen/commit/a2d149cd5d7cc2dec99a5b31600d5821e5e0cf7f)
 - **Changelog:** Update Changelog [`c3413c77`](https://github.com/AlexxNB/chalogen/commit/c3413c7783cc433a3b45e388c2d20c9b7a83f766)
