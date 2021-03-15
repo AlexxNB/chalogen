@@ -96,8 +96,11 @@ export function getLocalTags(){
 
 /** Get repository info */
 export function getLocalRepoInfo(){
-    const raw = git('remote', 'get-url', 'origin');
-    const match = raw.match(/git@(.+?):(.+?)\/(.+?).git/);
+    const raw = git('config', '--get', 'remote.origin.url');
+    let match = raw.match(/git@(.+?):(.+?)\/(.+?).git/);
+    if(!match) {
+        match = raw.match(/https?:\/\/(.+?)\/(.+?)\/(.+?)/);
+    }
     if(!match) return null;
     return{
         type: match[1].replace(/\..+$/,''),

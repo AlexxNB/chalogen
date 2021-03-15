@@ -1,5 +1,4 @@
 import core from '@actions/core';
-import github from'@actions/github';
 import {render} from 'chalogen';
 import fs from 'fs';
 
@@ -34,9 +33,9 @@ function makeOptions(opts){
         output: opts.output || 'cli',
         showTypes: opts.list.split(','),
         dateFormat: opts.date,
-        showUnreleased: opts.hideUnreleased !== false,
-        showBody: opts.hideTitle !== false,
-        showTitle: opts.hideBody !== false,
-        onlyVersion: (!!opts.version && opts.version) || (opts.unreleased && 'unreleased'),
+        showUnreleased: opts.hideUnreleased == 'false',
+        showBody: opts.hideTitle == 'false',
+        showTitle: opts.hideBody == 'false',
+        onlyVersion: (!!opts.version != 'false' && opts.version) || (opts.unreleased != 'false' && 'unreleased'),
     }
 }
