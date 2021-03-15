@@ -32,5 +32,5 @@ outputs:
   changelog: 
     description: 'Changelog in markdown format'
 runs:
-  using: 'node15'
+  using: 'node12'
   main: 'index.js'
