@@ -1,0 +1,36 @@
+name: 'Chalogen'
+description: 'CHANGELOG.md generator from commits and tags, with conventional commits support'
+inputs:
+  title:  
+    description: 'Title of changelog'
+    default: 'Changelog'
+  list:  
+    description: 'Conventional types list to include in changelog'
+    default: 'feat,fix,perf,docs,other'
+  date:  
+    description: 'Date format; use only %Y,%M and %D placeholders'
+    default: '%Y-%M-%D'
+  file:  
+    description: 'Filename of the changelog file'
+    default: 'CHANGELOG.md'
+  version:  
+    description: 'Show only specified version'
+    default: false
+  unreleased:  
+    description: 'Show only unreleased commits'
+    default: false
+  hide-unreleased:  
+    description: 'Hide unreleased section'
+    default: false
+  hide-title:  
+    description: 'Hide title of changelog'
+    default: false
+  hide-body:  
+    description: "Hide body of commit's messages"
+    default: false
+outputs:
+  changelog: 
+    description: 'Changelog in markdown format'
+runs:
+  using: 'node15'
+  main: 'index.js'
