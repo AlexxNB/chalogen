@@ -1,4 +1,4 @@
-name: CI - Changelog
+name: Build action
 
 on:
   push:
