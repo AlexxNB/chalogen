@@ -1,0 +1,24 @@
+name: CI - Changelog
+
+on:
+  push:
+    paths:
+      - 'src/*'
+      - 'esbuild.js'
+      - 'package.json.js'
+
+jobs:
+  build:
+    name: Build action script
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Installing NPM dependencies
+        run: npm install
+      - name: Building action script
+        run: npm run build:action
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'ci(Action): Build script'
+          file_pattern: action/main.js

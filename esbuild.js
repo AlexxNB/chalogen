@@ -3,6 +3,7 @@ const fs = require('fs/promises');
 const pkg = require('./package.json');
 
 const DEV = process.argv.includes('--dev');
+const ACT = process.argv.includes('--action');
 
 // Top-level Await? Ha-Ha
 (async ()=>{
@@ -26,7 +27,7 @@ const DEV = process.argv.includes('--dev');
         });
 
         // Build CLI
-        await build({
+        !ACT && await build({
             entryPoints: ['./src/bin.js'],
             platform: 'node',
             format: "cjs",
@@ -36,7 +37,18 @@ const DEV = process.argv.includes('--dev');
             bundle: true,
         });
 
-        await fs.chmod(pkg.bin.chalogen,0o755);
+        !ACT && await fs.chmod(pkg.bin.chalogen,0o755);
+
+
+        // Build Action
+        ACT && await build({
+            entryPoints: ['./src/action.js'],
+            platform: 'node',
+            format: "cjs",
+            outfile: 'action/main.js',
+            minify: true,
+            bundle: true,
+        });
 
         process.exit(0);
     }catch(err){
