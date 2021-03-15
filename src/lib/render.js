@@ -7,7 +7,7 @@ import {parseEmojies} from '@lib/emoji';
 const l = console.log;
 
 export function renderCli(options){
-    
+
     if(options.showTitle){
         l(c.bold(options.title));
         l();
@@ -21,6 +21,7 @@ export function renderCli(options){
 
     for(let tag in options.history){
         if( !options.showUnreleased && tag == 'unreleased' ) continue;
+        if( tag == 'unreleased' && !options.history[tag].commits.length) continue;
 
         const ver = options.history[tag];
 
