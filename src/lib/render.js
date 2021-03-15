@@ -7,14 +7,24 @@ import {parseEmojies} from '@lib/emoji';
 const l = console.log;
 
 export function renderCli(options){
-    l(c.bold(options.title));
-    l();
+    
+    if(options.showTitle){
+        l(c.bold(options.title));
+        l();
+    }
+    
+    if(options.onlyVersion){
+        const only = options.history[options.onlyVersion];
+        options.history = {};
+        if(only) options.history[options.onlyVersion] = only;
+    }
+
     for(let tag in options.history){
         if( !options.showUnreleased && tag == 'unreleased' ) continue;
 
         const ver = options.history[tag];
 
-        l(`${c.yellow(tag)}${ver.date ? c.gray(` - `+getDate(ver.date,options.dateFormat)) : ''}`);
+        !options.onlyVersion && l(`${c.yellow(tag)}${ver.date ? c.gray(` - `+getDate(ver.date,options.dateFormat)) : ''}`);
         for(let type of options.showTypes){
             if(!ver.commits[type]) continue;
             l(' ',`${c.bold(c.green(getTypeName(type)))}:`);

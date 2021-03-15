@@ -7,7 +7,9 @@ export const default_options = {
     title: 'Changelog',
     dateFormat: '%Y-%M-%D',
     showUnreleased: true,
-    showBody: true
+    showBody: true,
+    showTitle: true,
+    onlyVersion: null
 }
 
 export function render(options){
