@@ -31,6 +31,8 @@ Look for additional parameters with `chalogen --help` command.
 
 It is good idea to run **Chalogen** in GitHub Action to have always actual changelog file in your repository. Just add and commit file `.github/workflows/generate_changelog.yml` in your GitHub repository:
 
+> If you installed CLI you can just run `chalogen action` to put exactly same file in your current repo.
+
 ```yml
 name: Generate Changelog
 
