@@ -1,6 +1,10 @@
 # Changelog
 
-## unreleased
+## 0.1.2 - 2021-03-16
+
+### Bug Fixes
+
+- 🐛 Fix workflow file syntax [`2891c620`](https://github.com/AlexxNB/chalogen/commit/2891c620b4b29faa28cf40d481cec94552ddff07)
 
 ## 0.1.1 - 2021-03-16
 
