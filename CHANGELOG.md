@@ -1,6 +1,6 @@
 # Changelog
 
-## unreleased
+## 0.1.3 - 2021-03-16
 
 ### Documentation
 
