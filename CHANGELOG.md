@@ -2,6 +2,10 @@
 
 ## unreleased
 
+### Documentation
+
+- Add info about `chalogen action` command [`62d0e327`](https://github.com/AlexxNB/chalogen/commit/62d0e32764c83ec3339b48e7a880ba30b822fa15)
+
 ## 0.1.2 - 2021-03-16
 
 ### Bug Fixes
