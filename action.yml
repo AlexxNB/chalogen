@@ -1,5 +1,8 @@
 name: 'Chalogen'
 description: 'CHANGELOG.md generator from commits and tags, with conventional commits support'
+branding:
+  icon: calendar
+  color: yellow
 inputs:
   title:  
     description: 'Title of changelog'
