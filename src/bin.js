@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import sade from 'sade';
-import {render,default_options} from 'chalogen';
-import pkg from 'package';
 import fs from 'fs';
+import pkg from 'package';
+import {render,default_options,addAction} from 'chalogen';
 
 const cli = sade('chalogen');
 
@@ -31,6 +31,13 @@ cli
         opts.output = 'markdown';
         const ms = render(makeOptions(opts));
         fs.writeFileSync(dir || 'CHANGELOG.md',ms)
+    })
+
+cli
+    .command('action [name]')
+    .describe('Add workflow file for Chalogen GitHub Action')
+    .action( (dir,opts) => {
+        addAction(dir);
     })
 
 cli.parse(process.argv);

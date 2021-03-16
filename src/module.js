@@ -1,6 +1,8 @@
 import {getHistory,getLocalRepoInfo} from '@lib/git';
 import {renderCli,renderMarkdown} from '@lib/render';
 
+export {addAction} from '@lib/action';
+
 export const default_options = {
     output: 'cli',
     showTypes: ['feat','fix','perf','docs','other'],
