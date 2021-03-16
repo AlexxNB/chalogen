@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1 - 2021-03-16
+
+### Features
+
+- ✨ Command for addding Chalogen workflow file in repository [`ca0dcd70`](https://github.com/AlexxNB/chalogen/commit/ca0dcd700f8808c6ca8ddf664055cb405fddcb57)
+
 ## 0.1.0 - 2021-03-16
 
 ### Features
