@@ -20,16 +20,19 @@ export function getTypeName(code){
 export function sortByGroup(commits){
     return commits.reduce((result,commit) => {
         const match = commit.subject.match(/^(?:(\w+?)(?:\((.*?)\))?:\s*)?(.+)$/);
+
+        if(!match) return result;
+
         const type = (match[1] && TYPES[match[1]] && match[1]) || 'other';
 
-        if(!(type == 'docs' && match[2] == 'Changelog')){
-            if(!result[type]) result[type] = [];
-            result[type].push({
-                ...commit,
-                subject: match[3],
-                namespace:  match[2] || null
-            })
-        }
+        if(type == 'docs' && match[2] == 'Changelog') return result;
+
+        if(!result[type]) result[type] = [];
+        result[type].push({
+            ...commit,
+            subject: match[3],
+            namespace:  match[2] || null
+        })
 
         return result;
     },{});

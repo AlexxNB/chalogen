@@ -33,7 +33,7 @@ export function getHistory(conventional){
     tree.addVersion('unreleased',null);
 
     commits.forEach( (commit,i) => {
-        const match = commit.subject.match(/^(?:v|v\.|v\.\s+)?(\d\.\d\.\d.*)/);
+        const match = commit.subject.match(/^(?:(?:\->\s+)?(?:v|v\.|v\.\s+))?(\d\.\d\.\d.*)/);
         if(match) {
             tree.addVersion(match[1],commit.date);
             delete commits[i];
