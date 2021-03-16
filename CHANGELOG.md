@@ -1,6 +1,6 @@
 # Changelog
 
-## unreleased
+## 0.1.5 - 2021-03-16
 
 ### Bug Fixes
 
