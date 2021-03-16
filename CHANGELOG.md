@@ -1,6 +1,6 @@
 # Changelog
 
-## unreleased
+## 0.1.0 - 2021-03-16
 
 ### Features
 
@@ -17,6 +17,10 @@
 - 🐛 Wrong action script filepath [`985aa20e`](https://github.com/AlexxNB/chalogen/commit/985aa20ec9089996107239b543703f3f096ff2be)
 - 🐛 node15 is not allowed, using node12 instead [`3646f66e`](https://github.com/AlexxNB/chalogen/commit/3646f66e02d7dede5775cafd22dc5620d20ffa15)
 - **GIT:** 🐛 Wrong way to count commits in unreleased [`9a5bae10`](https://github.com/AlexxNB/chalogen/commit/9a5bae105b2947bef2bb85185308c5625246f4ee)
+
+### Documentation
+
+- 📝 Add readme [`2e88d719`](https://github.com/AlexxNB/chalogen/commit/2e88d7195e78a806594fb0bbab6c6e0b4815f1c4)
 
 ### Other
 
