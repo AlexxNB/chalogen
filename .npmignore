@@ -1,0 +1,6 @@
+src
+node_modules
+action
+action.yml
+esbuild.js
+jsconfig.json
