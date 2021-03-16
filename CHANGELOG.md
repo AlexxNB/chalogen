@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Bug Fixes
+
+- 🚑 App crashes if message is empty [`c0f38209`](https://github.com/AlexxNB/chalogen/commit/c0f3820914a158b1be1c87b6be5166261c153909)
+
 ## 0.1.4 - 2021-03-16
 
 ## 0.1.3 - 2021-03-16
