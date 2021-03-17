@@ -9,6 +9,10 @@ Keeping [`CAHNGELOG.md`](https://github.com/AlexxNB/chalogen/blob/master/CHANGEL
 * Supports tags named in [semver](https://semver.org) format
 * Supports Git emojis
 
+## Conventional commits
+
+**Chalogen** will parse all your commits, but better result will be with [conventional commits](https://www.conventionalcommits.org/). If work with VSCode, there is [nice extension](https://marketplace.visualstudio.com/items?itemName=vivaxy.vscode-conventional-commits) to help you making such commits. If commits doesn't matched as conventional, it is just goes to `other` type group.
+
 ## CLI 
 
 Install globaly with:
