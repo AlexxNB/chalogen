@@ -82,7 +82,7 @@ export function renderMarkdown(options){
                 const link = changelog.link(changelog.code(commit.hash.substring(0,8)),makeCommitLink(options.repo,commit.hash));
                 
                 changelog.list(`${namespace}${message}${issues||''} ${link}`,0);
-                if(options.showBody && body) changelog.line(body,0);
+                if(options.showBody && body) changelog.paragraph(changelog.italic(body),1);
             }
         }
     }
