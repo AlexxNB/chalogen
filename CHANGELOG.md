@@ -1,9 +1,10 @@
 # Changelog
 
-## unreleased
+## 0.1.7 - 2021-03-17
 
 ### Bug Fixes
 
+- Catch error of git running [`b310cfa4`](https://github.com/AlexxNB/chalogen/commit/b310cfa41a3872cf74b189d4aab6c9f6cc7d44ab)
 - Commit message body should be on new line [`d34bbaf9`](https://github.com/AlexxNB/chalogen/commit/d34bbaf9544e518d1ca9d70c1daed875ff692fca)
 
 ## 0.1.6 - 2021-03-17
@@ -85,7 +86,8 @@
 - **CLI:** Add links to commits [`02c6d3a6`](https://github.com/AlexxNB/chalogen/commit/02c6d3a6c9b99f702840ac7d2f984def4a5e250d)
 - **CLI:** Replace links in message by IDs [`8a145de0`](https://github.com/AlexxNB/chalogen/commit/8a145de0c423529264e3ff157e01dfbd233c8a63)
 - **CLI:** ✨ Issues links in changelog ([#1](https://github.com/AlexxNB/chalogen/issues/1)) [`16714fbc`](https://github.com/AlexxNB/chalogen/commit/16714fbc070665cf9109dd5e99533489af71b61c)
-Close [#1](https://github.com/AlexxNB/chlogen/issues/1)
+
+    *Close [#1](https://github.com/AlexxNB/chlogen/issues/1)*
 - Render in console [`be20bbc7`](https://github.com/AlexxNB/chalogen/commit/be20bbc74dd83eb1ffb694bd6afd04b82168ba9f)
 - Generating tree of commits by versions [`25fcdacc`](https://github.com/AlexxNB/chalogen/commit/25fcdacccc0a2beb6f65e1b7e65255421604c177)
 
@@ -100,7 +102,8 @@ Close [#1](https://github.com/AlexxNB/chlogen/issues/1)
 ### Bug Fixes
 
 - 🐛 Use name module, instead lib ([#1](https://github.com/AlexxNB/chalogen/issues/1)) [`0d275ee7`](https://github.com/AlexxNB/chalogen/commit/0d275ee7b02e237b777ff5cba273cce447d32ff9)
-As lib is better for folder with helpers, so file is now module.js
+
+    *As lib is better for folder with helpers, so file is now module.js*
 
 ### Other
 
