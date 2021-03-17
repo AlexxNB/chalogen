@@ -7,6 +7,7 @@ import {createDocument} from '@lib/markdown';
 
 const l = console.log;
 
+/** Print changelog in console */
 export function renderCli(options){
 
     if(options.showTitle){
@@ -45,7 +46,7 @@ export function renderCli(options){
     }
 }
 
-
+/** Return changelog as markdown markup */
 export function renderMarkdown(options){
     const changelog = createDocument();
 
@@ -90,6 +91,7 @@ export function renderMarkdown(options){
     return changelog.render();
 }
 
+/** Replace repository links by CLI links */
 function cleanCliLinks(str){
     return str
         .replace(/https?:\/\/.+?\/(?:issues|pull|merge_requests|pull_requests)\/(\d+)(?:\/\S*)?/gi,(match,id)=>{
@@ -97,6 +99,7 @@ function cleanCliLinks(str){
         })
 }
 
+/** Replace repository links by markdown links */
 function cleanMDLinks(str,doc){
     return str
         .replace(/https?:\/\/.+?\/(?:issues|pull|merge_requests|pull_requests)\/(\d+)(?:\/\S*)?/gi,(match,id)=>{

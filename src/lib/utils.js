@@ -1,3 +1,4 @@
+/** Trim all spaces to one, remove spaces at start and end */
 export function trimNewlines(str){
     return str
         .replace(/\n/g,' ')
@@ -5,6 +6,7 @@ export function trimNewlines(str){
         .replace(/^\s|\s$/g,'')
 }
 
+/** Format unix-timestamp to date string */
 export function getDate(timestamp,format){
     format = format || '%Y-%M-%D'
 

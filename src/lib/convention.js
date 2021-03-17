@@ -12,11 +12,13 @@ const TYPES = {
     revert: "Reverts"
 }
 
+/** return type name by its type identificator */
 export function getTypeName(code){
     if(code == 'other') return 'Other';
     return TYPES[code] || 'Unknown type';
 }
 
+/** Gets commits array and return object of groups by types */
 export function sortByGroup(commits){
     return commits.reduce((result,commit) => {
         const match = commit.subject.match(/^(?:(\w+?)(?:\((.*?)\))?:\s*)?(.+)$/);

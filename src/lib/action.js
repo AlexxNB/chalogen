@@ -3,6 +3,7 @@ import path from 'path';
 
 const DIR = path.join('.github','workflows');
 
+/** Place chalogen workflow file in directory in the project */
 export function addAction(filename){
     filename = (filename || 'generate_changelog')+'.yml';
     let filepath = path.join(DIR,filename);
@@ -16,6 +17,7 @@ export function addAction(filename){
     fs.writeFileSync(filepath,getActionBody());
 }
 
+/** Get workflow yml-code */
 function getActionBody(){
     return `name: Generate Changelog
 

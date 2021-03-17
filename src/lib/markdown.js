@@ -1,3 +1,4 @@
+/** Methods to form markdown document */
 export function createDocument(){
     let body = '';
 

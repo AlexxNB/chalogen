@@ -17,10 +17,16 @@ try {
   }
 
   console.log('Rendering markdown...');
+
+  //Print changelog in console
   render(makeOptions(opts));
+
+  // Get cahngelog as markdown
   opts.output = 'markdown';
   const body = render(makeOptions(opts));
+
   core.setOutput('changelog', body);
+  
   console.log('Saving to '+opts.file);
   fs.writeFileSync(opts.file,body);
 } catch (error) {

@@ -1,5 +1,6 @@
 const color = (str,begin,end) => `\u001b[${begin}m${str}\u001b[${end}m`
 
+/** Methods to style string in console */
 export default {
     blue: str => color(str,34,39),
     red: str => color(str,31,39),
