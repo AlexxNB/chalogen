@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.6 - 2021-03-17
+
+### Documentation
+
+- 📝 Add info about conventional commits and vscode extension [`567aa195`](https://github.com/AlexxNB/chalogen/commit/567aa195cce6d5aaac049123ff88b5f74a5e37b1)
+
 ## 0.1.5 - 2021-03-16
 
 ### Bug Fixes
