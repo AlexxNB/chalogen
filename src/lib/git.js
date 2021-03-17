@@ -123,7 +123,12 @@ export function makeCommitLink(repo,hash){
 
 /** Run git command with specified arguments. @return Raw command output */
 function git(){
-    return execSync('git '+Array.from(arguments).join(' ')).toString('utf-8');
+    try{
+        return execSync('git '+Array.from(arguments).join(' ')).toString('utf-8');
+    }catch(err){
+        console.log(err.message);
+        process.exit(1);
+    }
 }
 
 /** Get Issues IDs in array */
