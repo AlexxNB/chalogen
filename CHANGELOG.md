@@ -1,5 +1,11 @@
 # Changelog
 
+## unreleased
+
+### Bug Fixes
+
+- Commit message body should be on new line [`d34bbaf9`](https://github.com/AlexxNB/chalogen/commit/d34bbaf9544e518d1ca9d70c1daed875ff692fca)
+
 ## 0.1.6 - 2021-03-17
 
 ### Documentation
