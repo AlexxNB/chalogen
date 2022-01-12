@@ -1,5 +1,19 @@
 # Changelog
 
+## unreleased
+
+### Other
+
+- Merge branch 'master' of github.com:AlexxNB/chalogen [`f5c97d1a`](https://github.com/AlexxNB/chalogen/commit/f5c97d1a48a84bb84099f83803518d40789c0aef)
+
+## 0.1.8 - 2022-01-12
+
+### Bug Fixes
+
+- 🐛 Update rcomendented version of stefanzweifel/git-auto-commit-action [`8af8be55`](https://github.com/AlexxNB/chalogen/commit/8af8be55d6f86d582ad1575f4182217ff78e73b7)
+
+    *Old version caused Merge messages in commits in case when default branch wasn't `master`*
+
 ## 0.1.7 - 2021-03-17
 
 ### Bug Fixes
