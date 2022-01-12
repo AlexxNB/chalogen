@@ -58,7 +58,7 @@ jobs:
         with:
           title: My project changelog 
       - name: Commit Changelog to repository
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v4.13.0
         with:
           commit_message: 'docs(Changelog): Update Changelog'
           file_pattern: CHANGELOG.md
