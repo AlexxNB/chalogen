@@ -4,6 +4,7 @@
 
 ### Other
 
+- Merge branch 'master' of github.com:AlexxNB/chalogen [`1f40b7e5`](https://github.com/AlexxNB/chalogen/commit/1f40b7e5a5d2394739a3b0e1499fea72307b3a27)
 - Merge branch 'master' of github.com:AlexxNB/chalogen [`f5c97d1a`](https://github.com/AlexxNB/chalogen/commit/f5c97d1a48a84bb84099f83803518d40789c0aef)
 
 ## 0.1.8 - 2022-01-12
