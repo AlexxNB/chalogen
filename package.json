@@ -1,6 +1,6 @@
 {
   "name": "chalogen",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "CHANGELOG.md generator CLI and Github Action",
   "main": "dist/lib.js",
   "bin": {
