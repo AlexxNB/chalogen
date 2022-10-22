@@ -1,7 +1,7 @@
 import c from '@lib/colors';
 import {makeIssueLink, makeCommitLink, makeMergeLink} from '@lib/git';
 import {getDate} from '@lib/utils';
-import {getTypeName} from '@lib/convention';
+import {getTypeName, normalizeType} from '@lib/convention';
 import {parseEmojies} from '@lib/emoji';
 import {createDocument} from '@lib/markdown';
 
@@ -27,8 +27,9 @@ export function renderCli(options){
         const ver = options.history[tag];
 
         !options.onlyVersion && l(`${c.yellow(tag)}${ver.date ? c.gray(` - `+getDate(ver.date,options.dateFormat)) : ''}`);
-        for(let type of options.showTypes){
-            if(!ver.commits[type]) continue;
+        for(let rawType of options.showTypes){
+            const type = normalizeType(rawType, true);
+            if(!type || !ver.commits[type]) continue;
             l(' ',`${c.bold(c.green(getTypeName(type)))}:`);
             for(let commit of ver.commits[type]){
                 const namespace = commit.namespace ? c.bold(commit.namespace+': ') : '';
@@ -67,8 +68,9 @@ export function renderMarkdown(options){
 
         !options.onlyVersion && changelog.header(`${tag}${ver.date ? ` - `+getDate(ver.date,options.dateFormat) : ''}`,2,0);
 
-        for(let type of options.showTypes){
-            if(!ver.commits[type]) continue;
+        for(let rawType of options.showTypes){
+            const type = normalizeType(rawType, true);
+            if(!type || !ver.commits[type]) continue;
 
             changelog.header(getTypeName(type),3,0);
             

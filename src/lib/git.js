@@ -54,7 +54,7 @@ export function getHistory(conventional, mergesOnly){
     } else {
         delete tree['unreleased'].date;
     }
-
+    
     return tree;
 }
 
