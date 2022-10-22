@@ -2,6 +2,10 @@
 
 ## unreleased
 
+### Features
+
+- add --merges option to parse only merge commits with body [`0f2820d4`](https://github.com/AlexxNB/chalogen/commit/0f2820d44d91ca0a1de985fdd65152db8e5179e6)
+
 ### Other
 
 - Merge branch 'master' of github.com:AlexxNB/chalogen [`1f40b7e5`](https://github.com/AlexxNB/chalogen/commit/1f40b7e5a5d2394739a3b0e1499fea72307b3a27)
