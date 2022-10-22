@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.1 - 2022-10-22
+
+### Features
+
+- add abillity to use variants for each commit type [`01a6f2a0`](https://github.com/AlexxNB/chalogen/commit/01a6f2a09d6d9f1ef1ef2c96a202272ef590f3b0)
+
+### Bug Fixes
+
+- fix link in CLI output when --merges used [`9409aa4a`](https://github.com/AlexxNB/chalogen/commit/9409aa4ae7f469ed7580e2068a397df45b20bc59)
+
 ## 0.2.0 - 2022-10-22
 
 ### Features
