@@ -38,8 +38,9 @@ export function renderCli(options){
                 const issues = commit.issues 
                             && commit.issues.length 
                             && ` (${commit.issues.map(i =>c.link('#'+i,makeIssueLink(options.repo,i))).join(', ')})`;
-                const link = c.blue(c.link(commit.hash.substring(0,8),makeCommitLink(options.repo,commit.hash)));
-                
+                const link = commit.mergeId 
+                    ? c.blue(c.link(`#${commit.mergeId}`,makeMergeLink(options.repo,commit.mergeId)))
+                    : c.blue(c.link(commit.hash.substring(0,8),makeCommitLink(options.repo,commit.hash)));
                 l('  ',c.green('*'),`${namespace}${message}${issues||''} ${link}`);
                 if(options.showBody && body) l('    ',body);
             }
