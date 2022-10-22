@@ -16,6 +16,7 @@ cli
     .option('--no-unreleased', 'Hide unreleased section')
     .option('--no-title', 'Hide title of changelog')
     .option('--no-body', 'Hide body of commit\'s messages')
+    .option('--merges, -m', 'Parse only merge commits to generate changelog')
 
 cli
     .command('print')
@@ -48,9 +49,10 @@ function makeOptions(opts){
         output: opts.output || 'cli',
         showTypes: opts.list.split(','),
         dateFormat: opts.date,
-        showUnreleased: opts.unreleased !== false,
-        showBody: opts.body !== false,
-        showTitle: opts.title !== false,
+        showUnreleased: !opts['no-unreleased'],
+        showBody: !opts['no-body'],
+        showTitle: !opts['no-title'],
+        onlyMerges: !!opts.merges,
         onlyVersion: (!!opts.only && opts.only) || (opts.u && 'unreleased'),
     }
 }

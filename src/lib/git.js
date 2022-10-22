@@ -4,55 +4,58 @@ import {sortByGroup} from '@lib/convention';
 
 /** Get tree-objects of commits separated by tags/version_commits */
 
-export function getHistory(conventional){
-    const commits = getLocalCommits();
-    const tags = getLocalTags();
+export function getHistory(conventional, mergesOnly){
+    let commits = getLocalCommits();
+    const versions = getLocalTags();
 
-    const tree = {
-        list: {},
-        addVersion(version,date){
-            this.list[version]={
-                date: date||null,
-                commits: []
-            }
-        },
-        addCommit(commit){
-            let obj = Object.entries(this.list)
-                .sort((a,b) =>{
-                    if(a[1].date === null) return -1;
-                    if(b[1].date === null) return 1;
-                    return b[1].date-a[1].date;
-                })
-                .reduce((o,[name,tag])=>{
-                    return (tag.date||Infinity) >= commit.date ? tag : o;
-                },null);
-            obj && obj.commits.push(commit);
-        }
+    if (mergesOnly) {
+        commits = commits
+            .filter((commit) => 
+                commit.subject.startsWith('Merge') 
+                && commit.body
+            )
+            .map((commit) => {
+                const mergeId = retrieveMergeId(commit.footer);
+                commit.subject = commit.body;
+                commit.body = null;
+                if (mergeId) commit.mergeId = mergeId;
+                return commit;
+            });
     }
 
-    tree.addVersion('unreleased',null);
+    versions.unshift({date: Math.floor(new Date().getTime() / 1000), tag:'unreleased'});
 
-    commits.forEach( (commit,i) => {
-        const match = commit.subject.match(/^(?:(?:\->\s+)?(?:v|v\.|v\.\s+))?(\d\.\d\.\d.*)/);
-        if(match) {
-            tree.addVersion(match[1],commit.date);
-            delete commits[i];
+    const tree = versions.reduce((o, ver) => {
+        o[ver.tag] = {
+            date: ver.date,
+            commits: [],
         }
-    });
+        return o;
+    }, {});
 
-    tags.forEach( tag => {
-        tree.addVersion(tag.tag,tag.date);
-    });
-
-    commits.forEach(commit => tree.addCommit(commit));
-
-    if(conventional) for(let ver in tree.list){
-        tree.list[ver].commits = sortByGroup(tree.list[ver].commits);
+    const reVersion = /(?:v\.)?\d\.\d.+$/;
+    for( let commit of commits) {
+        if(
+            reVersion.test(commit.subject) 
+            || commit.subject.startsWith('Merge')
+            || commit.subject.startsWith('# Conflicts:')
+        ) continue;
+        const version = versions.findLast((ver) => ver.date >= commit.date);
+        tree[version.tag].commits.push(commit);
     }
 
-    if(Object.keys(tree.list['unreleased'].commits).length == 0) delete tree.list['unreleased'];
+    if(conventional) for(let ver in tree){
+        tree[ver].commits = sortByGroup(tree[ver].commits);
+    }
 
-    return tree.list;
+
+    if(tree['unreleased'].commits.length == 0) {
+        delete tree['unreleased'];
+    } else {
+        delete tree['unreleased'].date;
+    }
+
+    return tree;
 }
 
 /** Get array of the commits from local dir */
@@ -85,13 +88,13 @@ export function getLocalTags(){
     let match;
     while(match = re.exec(raw)){
         const parts = match[1].split(':*:');
-        const sub = parts[1].match(/tag:\s+(?:v|v\.|v\.\s+)?(\d.+?),/);
+        const sub = parts[1].match(/tag:\s+(?:v|v\.|v\.\s+)?(\d.+)$/);
         sub && list.push({
             date: Number(parts[0]),
             tag: trimNewlines(sub[1]),
         })
     }
-    return list;
+    return list.sort((a,b) => b.date - a.date);
 }
 
 /** Get repository info */
@@ -113,6 +116,16 @@ export function getLocalRepoInfo(){
 /** Make issue link */
 export function makeIssueLink(repo,id){
     return `${repo.url}/${repo.owner}/${repo.project}/issues/${id}`;
+}
+
+/** Make merge link */
+export function makeMergeLink(repo,id){
+    const merge = repo.type == 'github' 
+        ? 'pull' 
+        : repo.type == 'gitlab' 
+            ? 'merge_requests'
+            : 'pull-requests';
+    return `${repo.url}/${repo.owner}/${repo.project}/${merge}/${id}`;
 }
 
 /** Make commit link */
@@ -140,4 +153,10 @@ function getIssues(str){
         result.push(match[1] || match[2] || match[3]);
     }
     return [...new Set(result)];
+}
+
+/** Retrieve merge request ID */
+function retrieveMergeId(body) {
+    const match = body && body.match(/^See merge request .+!(\d+)$/)
+    return match ? match[1] : null;
 }

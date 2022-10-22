@@ -11,15 +11,14 @@ export const default_options = {
     showUnreleased: true,
     showBody: true,
     showTitle: true,
-    onlyVersion: null
+    onlyVersion: null,
 }
 
 export function render(options){
-
     options = {
         ...default_options,
         ...(options || {}),
-        history: getHistory(true),
+        history: getHistory(true, options.onlyMerges),
         repo: getLocalRepoInfo()
     }
 

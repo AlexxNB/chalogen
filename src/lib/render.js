@@ -1,5 +1,5 @@
 import c from '@lib/colors';
-import {makeIssueLink,makeCommitLink} from '@lib/git';
+import {makeIssueLink, makeCommitLink, makeMergeLink} from '@lib/git';
 import {getDate} from '@lib/utils';
 import {getTypeName} from '@lib/convention';
 import {parseEmojies} from '@lib/emoji';
@@ -80,7 +80,9 @@ export function renderMarkdown(options){
                 const issues = commit.issues 
                             && commit.issues.length 
                             && ` (${commit.issues.map(i => changelog.link('#'+i,makeIssueLink(options.repo,i))).join(', ')})`;
-                const link = changelog.link(changelog.code(commit.hash.substring(0,8)),makeCommitLink(options.repo,commit.hash));
+                const link = commit.mergeId 
+                    ? changelog.link(changelog.code(`#${commit.mergeId}`),makeMergeLink(options.repo,commit.mergeId))
+                    : changelog.link(changelog.code(commit.hash.substring(0,8)),makeCommitLink(options.repo,commit.hash));
                 
                 changelog.list(`${namespace}${message}${issues||''} ${link}`,0);
                 if(options.showBody && body) changelog.paragraph(changelog.italic(body),1);
