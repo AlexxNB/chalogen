@@ -4,9 +4,9 @@ import {sortByGroup} from '@lib/convention';
 
 /** Get tree-objects of commits separated by tags/version_commits */
 
-export function getHistory(conventional, mergesOnly){
-    let commits = getLocalCommits();
-    const versions = getLocalTags();
+export function getHistory(conventional, mergesOnly, since){
+    let commits = getLocalCommits(since);
+    const versions = getLocalTags(since);
 
     if (mergesOnly) {
         commits = commits
@@ -33,6 +33,7 @@ export function getHistory(conventional, mergesOnly){
         return o;
     }, {});
 
+    versions.reverse();
     const reVersion = /(?:v\.)?\d\.\d.+$/;
     for( let commit of commits) {
         if(
@@ -40,7 +41,7 @@ export function getHistory(conventional, mergesOnly){
             || commit.subject.startsWith('Merge')
             || commit.subject.startsWith('# Conflicts:')
         ) continue;
-        const version = versions.findLast((ver) => ver.date >= commit.date);
+        const version = versions.find((ver) => ver.date >= commit.date);
         tree[version.tag].commits.push(commit);
     }
 
@@ -59,10 +60,19 @@ export function getHistory(conventional, mergesOnly){
 }
 
 /** Get array of the commits from local dir */
-export function getLocalCommits(){
-    let list = [];
-    let raw = git('log','--pretty=format:begin:%H:*:%at:*:%an:*:%B:end','--date=raw');
+export function getLocalCommits(since) {
+    const params = [
+        'log',
+        '--pretty=format:begin:%H:*:%at:*:%an:*:%B:end',
+        '--date=raw',
+    ];
+    if (since) {
+        params.push(`${since}^..HEAD`);
+    }
+    let raw = git(...params);
     const re = /^begin:([\s\S]+?):end$/gm;
+
+    let list = [];
     let match;
     while(match = re.exec(raw)){
         const parts = match[1].split(':*:');
@@ -77,13 +87,23 @@ export function getLocalCommits(){
             issues: getIssues(parts[3])
         })
     }
+
     return list;
 }
 
 /** Get array of the tags from local dir */
-export function getLocalTags(){
+export function getLocalTags(since){
+    const params = [
+        'log',
+        '--tags',
+        '--simplify-by-decoration',
+        '--pretty="format:begin:%at:*:%D:end"',
+    ];
+    if (since) {
+        params.push(`${since}^..HEAD`);
+    }
+    let raw = git(...params);
     let list = [];
-    let raw = git('log','--tags', '--simplify-by-decoration', '--pretty="format:begin:%at:*:%D:end"');
     const re = /^begin:([\s\S]+?):end$/gm;
     let match;
     while(match = re.exec(raw)){

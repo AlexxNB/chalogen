@@ -17,6 +17,7 @@ cli
     .option('--no-title', 'Hide title of changelog')
     .option('--no-body', 'Hide body of commit\'s messages')
     .option('--merges, -m', 'Parse only merge commits to generate changelog')
+    .option('--since, -s', 'Start commit since build the changelog',default_options.since)
 
 cli
     .command('print')
@@ -53,6 +54,7 @@ function makeOptions(opts){
         showBody: !opts['no-body'],
         showTitle: !opts['no-title'],
         onlyMerges: !!opts.merges,
+        since: opts.since,
         onlyVersion: (!!opts.only && opts.only) || (opts.u && 'unreleased'),
     }
 }
