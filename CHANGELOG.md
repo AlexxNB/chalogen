@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2 - 2022-11-01
+
+### Features
+
+- add --since option to specify commit from which changelog will be rendered [`79dfdc39`](https://github.com/AlexxNB/chalogen/commit/79dfdc39ba358941feb7fe2f0950ad0d6d625a49)
+
 ## 0.2.1 - 2022-10-22
 
 ### Features
